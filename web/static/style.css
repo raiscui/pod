@@ -37,10 +37,8 @@ h2 {
 
 #apps {
     list-style-type: none;
-    padding: 0;
-    border: 1px solid #ddd;
-    line-height: 2em;
-    height:54px;
+    height:20px;
+	min-width:900px;
 }
 
 #apps li {
@@ -92,10 +90,20 @@ h2 {
     text-transform: uppercase;
 }
 
-li.align-left {
+.left-set {
     float:left;
-
+   
 }
-li.align-right {
+.right-set {
     float:right;
 }
+
+.wrapper {
+	border:1px solid #ddd;
+	display:block;
+	clear:both;
+	height:20px;
+	padding: 15px 15px 10px;
+	margin-top:-1px;
+}
+

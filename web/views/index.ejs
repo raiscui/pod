@@ -8,31 +8,25 @@
     </head>
     <body>
         <h1>Linode App Status</h1>
-        <table id="apps">
-        <tbody>
+        <div id="apps">
         <% apps.forEach(function (app) { %>
-        <tr class="align-left">
-          <td class="indicator <%= app.status %>"></td>
-          <td class="name"><%= app.name %></td>
-          <td class="port">:<%= app.port %></td>
-        </tr>
-            <li >
-                <span class="indicator <%= app.status %>"></span>
-                <!-- <span class="status <%= app.status %>"><%= app.status %></span> -->
+        <div class="wrapper">
+        	<div class="left-set">
+            	<span class="indicator <%= app.status %>"></span>
                 <span class="name"><%= app.name %></span>
                 <span class="port">:<%= app.port %></span>
-                </li>
-                <li class="align-right">
-                  <% if (app.instanceCount > 0) { %>
-                      <span class="instances">instances: <%= app.instanceCount %></span> |
-                      <span class="restarts">restarts: <span class="<%= app.restarts > 0 ? 'no' : 'yes' %>"><%= app.restarts %></span></span> |
-                      <span class="uptime">uptime: <%= app.uptime %></span> |
-                      <span class="memory">Memory: <span class="<%= app.memory > 100 ? 'no' : '' %>"><%= app.memory %></span></span> |
-                      <span class="cpu">CPU: <span class="<%= app.cpu > 10 ? 'no' : '' %>"><%= app.cpu %></span></span>
-                  <% } %>
-                </li>
+            </div>
+            <div class="right-set">
+            	<% if (app.instanceCount > 0) { %>
+                <span class="instances">instances: <%= app.instanceCount %></span> |
+                <span class="restarts">restarts: <span class="<%= app.restarts > 0 ? 'no' : 'yes' %>"><%= app.restarts %></span></span> |
+                <span class="uptime">uptime: <%= app.uptime %></span> |
+                <span class="memory">Memory: <span class="<%= app.memory > 100 ? 'no' : '' %>"><%= app.memory %></span></span> |
+                <span class="cpu">CPU: <span class="<%= app.cpu > 10 ? 'no' : '' %>"><%= app.cpu %></span></span>
+              <% } %>
+            </div>
+          </div>
         <% }) %>
-        </tbody>
-        </table>
+        </div>
     </body>
 </html>
