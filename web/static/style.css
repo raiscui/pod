@@ -38,18 +38,16 @@ h2 {
 #apps {
     list-style-type: none;
     padding: 0;
+    border: 1px solid #ddd;
     line-height: 2em;
+    height:54px;
 }
 
 #apps li {
     padding: 12px 20px;
-    border: 1px solid #ddd;
     border-top: none;
 }
 
-#apps li:first-child {
-    border-top: 1px solid #ddd;
-}
 
 #apps span {
     display: inline-block;
@@ -92,5 +90,12 @@ h2 {
     color: #00B7FF;
     font-weight: bold;
     text-transform: uppercase;
-    width: 120px;
+}
+
+li.align-left {
+    float:left;
+
+}
+li.align-right {
+    float:right;
 }

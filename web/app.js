@@ -16,9 +16,11 @@ var reloadConf = function (req, res, next) {
 }
 
 var auth = express.basicAuth(function (user, pass) {
-    var u = conf.web.username || 'admin',
-        p = conf.web.password || 'admin'
-    return user === u && pass === p
+  // Disabling auth
+  return true;
+  //   var u = conf.web.username || 'admin',
+  //      p = conf.web.password || 'admin'
+  //  return user === u && pass === p
 })
 
 app.configure(function(){
@@ -48,21 +50,22 @@ app.get('/json', auth, function (req, res) {
 
 app.post('/hooks/:appid', express.bodyParser(), function (req, res) {
     var appid = req.params.appid,
-        payload = req.body.payload,
-        app = conf.apps[appid]
+        payload = JSON.stringify(req.body),
+        app = conf.apps[appid];
 
+    console.log('Try parse incoming json');
     try {
         payload = JSON.parse(payload)
     } catch (e) {
         return res.end(e.toString())
     }
-
+    console.log('parsed json');
     if (app && verify(req, app, payload)) {
-        executeHook(appid, app, payload, function () {
-            res.end()
+        executeHook(appid, app, payload, function (err) {
+            res.end(err || "Success")
         })
     } else {
-        res.end()
+        res.end("Ignoring commit")
     }
 })
 
@@ -93,10 +96,10 @@ function verify (req, app, payload) {
         console.log('aborted.')
         return
     }
-    // skip it with [pod skip] message
+    // skip it with [Ignore Deploy] message
     var commit = payload.head_commit
     console.log('commit message: ' + commit.message)
-    if (/\[pod skip\]/.test(commit.message)) {
+    if (/\[Ignore Deploy\]/.test(commit.message)) {
         console.log('aborted.')
         return
     }
