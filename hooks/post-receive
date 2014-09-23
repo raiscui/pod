@@ -19,8 +19,13 @@ if [ -f .podhook ]; then
 		git reset $LAST_COMMIT --hard
 		exit $rc
 	fi
-elif [ -f package.json ]; then
-	npm install
+else
+  if [ -f package.json ]; then
+    npm install
+  fi
+  if [ -f bower.json ]; then
+    bower --allow-root install
+  fi
 fi
 
 pod stop {{app}}
