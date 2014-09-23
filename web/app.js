@@ -4,6 +4,7 @@ var http     = require('http'),
     spawn    = require('child_process').spawn,
     express  = require('express'),
     pod      = require('../lib/api'),
+    connect  = require('connect'),
     app      = express()
 
 // late def, wait until pod is ready
@@ -27,6 +28,8 @@ app.configure(function(){
     app.set('views', __dirname + '/views')
     app.set('view engine', 'ejs')
     app.use(express.favicon())
+    app.use(express.json());
+    app.use(express.urlencoded());
     app.use(reloadConf)
     app.use(app.router)
     app.use(express.static(path.join(__dirname, 'static')))
@@ -48,7 +51,7 @@ app.get('/json', auth, function (req, res) {
     })
 })
 
-app.post('/hooks/:appid', express.bodyParser(), function (req, res) {
+app.post('/hooks/:appid',  function (req, res) {
     var appid = req.params.appid,
         payload = JSON.stringify(req.body),
         app = conf.apps[appid];
