@@ -4,7 +4,6 @@ var http     = require('http'),
     spawn    = require('child_process').spawn,
     express  = require('express'),
     pod      = require('../lib/api'),
-    connect  = require('connect'),
     app      = express()
 
 // late def, wait until pod is ready
