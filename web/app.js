@@ -82,7 +82,7 @@ pod.once('ready', function () {
             })
         })
     }
-    app.listen(process.env.PORT || 19999, process.env.POD_BIND_ADDR)
+    app.listen(process.env.PORT || 19999)
 })
 
 // Helpers
